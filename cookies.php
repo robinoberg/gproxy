@@ -1,19 +1,4 @@
 <?php
-/*******************************************************************
-* Glype is copyright and trademark 2007-2016 UpsideOut, Inc. d/b/a Glype
-* and/or its licensors, successors and assigners. All rights reserved.
-*
-* Use of Glype is subject to the terms of the Software License Agreement.
-* http://www.glype.com/license.php
-*******************************************************************
-* This page displays a list of cookies that have been forwarded
-* to the user and allows individual cookies to be deleted.
-******************************************************************/
-
-
-/*****************************************************************
-* Initialize glype
-******************************************************************/
 
 require 'includes/init.php';
 
@@ -51,7 +36,7 @@ OUT;
 if ( $CONFIG['cookies_on_server'] ) {
 
 	# Check cookie file exists
-	if ( file_exists($cookieFile = $CONFIG['cookies_folder'] . glype_session_id()) ) {
+	if ( file_exists($cookieFile = $CONFIG['cookies_folder'] . bypass_session_id()) ) {
 
 		# Load into array
 		if ( $cookieLine = file($cookieFile, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES) ) {

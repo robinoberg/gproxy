@@ -1,19 +1,4 @@
 <?php
-/*******************************************************************
-* Glype is copyright and trademark 2007-2016 UpsideOut, Inc. d/b/a Glype
-* and/or its licensors, successors and assigners. All rights reserved.
-*
-* Use of Glype is subject to the terms of the Software License Agreement.
-* http://www.glype.com/license.php
-*******************************************************************
-* This file is the main component of the glype proxy application.
-* It decodes values contained within the current URI to determine a
-* resource to download and pass onto the user.
-******************************************************************/
-
-/*****************************************************************
-* Initialise
-******************************************************************/
 
 require 'includes/init.php';
 
@@ -140,7 +125,7 @@ if ( $CONFIG['stop_hotlinking'] && empty($_SESSION['no_hotlink']) ) {
 	if ( ! empty($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'http') === 0 ) {
 
 		# Examine all the allowed domains (including our current domain)
-		foreach ( array_merge( (array) GLYPE_URL, $CONFIG['hotlink_domains'] ) as $domain ) {
+		foreach ( array_merge( (array) BYPASS_URL, $CONFIG['hotlink_domains'] ) as $domain ) {
 
 			# Do a case-insensitive comparison
 			if ( stripos($_SERVER['HTTP_REFERER'], $domain) !== false ) {
@@ -241,7 +226,7 @@ if ( $URL['scheme'] == 'https' && $CONFIG['ssl_warning'] && empty($_SESSION['ssl
 global $foundPlugin;
 $plugins = explode(',', $CONFIG['plugins']);
 if ($foundPlugin = in_array($URL['domain'], $plugins)) {
-	include(GLYPE_ROOT.'/plugins/'.$URL['domain'].'.php');
+	include(BYPASS_ROOT.'/plugins/'.$URL['domain'].'.php');
 }
 
 
@@ -429,7 +414,7 @@ if ( $_SESSION['custom_browser']['user_agent'] ) {
 if ( $_SESSION['custom_browser']['referrer'] == 'real' ) {
 
 	# Automatically determine referrer
-	if ( isset($_SERVER['HTTP_REFERER']) && $flag != 'norefer' && strpos($tmp = deproxyURL($_SERVER['HTTP_REFERER']), GLYPE_URL) === false ) {
+	if ( isset($_SERVER['HTTP_REFERER']) && $flag != 'norefer' && strpos($tmp = deproxyURL($_SERVER['HTTP_REFERER']), BYPASS_URL) === false ) {
 		$toSet[CURLOPT_REFERER] = $tmp;
 	}
 
@@ -483,7 +468,7 @@ if ( $options['allowCookies'] ) {
 		if ( $s = checkTmpDir($CONFIG['cookies_folder'], 'Deny from all') ) {
 
 			# Set cURL to use this as the cookie jar
-			$toSet[CURLOPT_COOKIEFILE] = $toSet[CURLOPT_COOKIEJAR] = $CONFIG['cookies_folder'] . glype_session_id();
+			$toSet[CURLOPT_COOKIEFILE] = $toSet[CURLOPT_COOKIEJAR] = $CONFIG['cookies_folder'] . bypass_session_id();
 
 		}
 
@@ -1302,10 +1287,7 @@ class Request {
 
 			}
 
-			# Some cookies will be sent with the domain starting with . as per RFC2109
-			# The . then has to be stripped off by us when doing the tail match to determine
-			# which cookies to send since ".glype.com" should match "glype.com". It's more
-			# efficient to do any manipulations while forwarding cookies than on every request
+		
 			if ( $attr['domain'][0] == '.' ) {
 				$attr['domain'] = substr($attr['domain'], 1);
 			}
@@ -1515,7 +1497,7 @@ if ( $fetch->parseType ) {
 	}
 
 	# Load the main parser
-	require GLYPE_ROOT . '/includes/parser.php';
+	require BYPASS_ROOT . '/includes/parser.php';
 
 	# Create new instance, passing in the options that affect parsing
 	$parser = new parser($options, $jsFlags);
@@ -1563,7 +1545,7 @@ if ( $fetch->parseType ) {
 					}
 					$vars['toShow']	= $toShow; # Options
 					$vars['return']	= rawurlencode(currentURL()); # Return URL (for clearcookies) (i.e. current URL proxied)
-					$vars['proxy']	= GLYPE_URL; # Base URL for proxy directory
+					$vars['proxy']	= BYPASS_URL; # Base URL for proxy directory
 
 					# Load the template
 					$insert = loadTemplate('framedForm.inc', $vars);

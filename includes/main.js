@@ -1,18 +1,4 @@
-/*******************************************************************
-* Glype is copyright and trademark 2007-2016 UpsideOut, Inc. d/b/a Glype
-* and/or its licensors, successors and assigners. All rights reserved.
-*
-* Use of Glype is subject to the terms of the Software License Agreement.
-* http://www.glype.com/license.php
-*******************************************************************
-* This file is the javascript library. The version downloaded by the
-* user is compressed to save on bandwidth. This uncompressed version
-* is available for you to make your own changes if desired.
-******************************************************************/
 
-/*****************************************************************
-* Set up variables
-******************************************************************/
 
 if(parent.frames.length==0) {
 	x=location.href;

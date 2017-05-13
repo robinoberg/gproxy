@@ -1,18 +1,5 @@
 <?php
-/*******************************************************************
-* Glype is copyright and trademark 2007-2016 UpsideOut, Inc. d/b/a Glype
-* and/or its licensors, successors and assigners. All rights reserved.
-*
-* Use of Glype is subject to the terms of the Software License Agreement.
-* http://www.glype.com/license.php
-*******************************************************************
-* This file is the processor that takes incoming data and processes
-* it, surprisingly enough. Works with various aspects of the script.
-******************************************************************/
 
-/*****************************************************************
-* Initialise
-******************************************************************/
 
 require 'init.php';
 
@@ -131,7 +118,7 @@ switch ( $action ) {
 		if ( $CONFIG['cookies_on_server'] ) {
 
 			# Look for cookie file and check writable
-			if ( is_writable($file = $CONFIG['cookies_folder'] . glype_session_id()) ) {
+			if ( is_writable($file = $CONFIG['cookies_folder'] . bypass_session_id()) ) {
 
 				# Delete it
 				unlink($file);
@@ -186,7 +173,7 @@ switch ( $action ) {
 			if ( $CONFIG['cookies_on_server'] ) {
 
 				# Server-side storage. Look for cookie file.
-				if ( file_exists($cookieFile = $CONFIG['cookies_folder'] . glype_session_id()) && ( $file = file($cookieFile) ) ) {
+				if ( file_exists($cookieFile = $CONFIG['cookies_folder'] . bypass_session_id()) && ( $file = file($cookieFile) ) ) {
 
 					# Loop through lines, looking for cookies to delete
 					foreach ( $file as $id => $line ) {

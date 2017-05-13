@@ -1,19 +1,5 @@
 <?php
-/*******************************************************************
-* Glype is copyright and trademark 2007-2016 UpsideOut, Inc. d/b/a Glype
-* and/or its licensors, successors and assigners. All rights reserved.
-*
-* Use of Glype is subject to the terms of the Software License Agreement.
-* http://www.glype.com/license.php
-*******************************************************************
-* This file is a global include used everywhere in the script.
-******************************************************************/
 
-/*****************************************************************
-* Initialise
-******************************************************************/
-
-# Choose error reporting levels
 error_reporting(E_ALL);
 ini_set('display_errors', 0); # Always report but don't display on live installation
 
@@ -31,16 +17,16 @@ define('HTTPS', ( empty($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) == '
 # ESSENTIAL if you're distributing a theme or plugin.
 define('COMPATABILITY_MODE', false);
 
-# Set up paths/urls
-define('GLYPE_ROOT', str_replace('\\', '/', dirname(dirname(__FILE__))));
-define('GLYPE_URL',
+# Set up paths/urls   
+define('BYPASS_ROOT', str_replace('\\', '/', dirname(dirname(__FILE__))));
+define('BYPASS_URL',
 	'http'
 	. ( HTTPS ? 's' : '' )
 	. '://'
 	. $_SERVER['HTTP_HOST']
 	. preg_replace('#/(?:(?:includes/)?[^/]*|' . preg_quote(SCRIPT_NAME) . '.*)$#', '', $_SERVER['PHP_SELF'])
 ); 
-define('GLYPE_BROWSE', GLYPE_URL . '/' . SCRIPT_NAME);
+define('BYPASS_BROWSE', BYPASS_URL . '/' . SCRIPT_NAME);
 
 # Set timezone (uncomment and set to desired timezone)
 #date_default_timezone_set('GMT');
@@ -52,7 +38,7 @@ $_SERVER['REQUEST_TIME'] = time();
 define('ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
 
 # Load settings
-require GLYPE_ROOT . '/includes/settings.php';
+require BYPASS_ROOT . '/includes/settings.php';
 
 
 /*****************************************************************
@@ -91,8 +77,8 @@ $themeReplace['version'] = 'v1.4.15';
 
 # Look for a config.php in the /themes/themeName/ folder
 # If running multiple proxies off the same source files
-# set the MULTIGLYPE constant to stop the script automatically loading theme config files.
-if ( ! defined('MULTIGLYPE') && file_exists($tmp = GLYPE_ROOT . '/themes/' . $CONFIG['theme'] . '/config.php') ) {
+# set the MULTIBYPASS constant to stop the script automatically loading theme config files.
+if ( ! defined('MULTIBYPASS') && file_exists($tmp = BYPASS_ROOT . '/themes/' . $CONFIG['theme'] . '/config.php') ) {
 
 	# Load it
 	include $tmp;
@@ -112,7 +98,7 @@ session_name('s');
 session_cache_limiter('private_no_expire');
 
 # Don't call _start() if session.auto_start = 1
-if ( glype_session_id() == '' ) {
+if ( bypass_session_id() == '' ) {
 	session_start();
 }
 
@@ -381,7 +367,7 @@ function proxyURL($url, $givenFlag = false) {
 	}
 
 	# Validate the input
-	if ( empty($url) || $url[0]=='#' || $url=='about:' || stripos($url,'data:')===0 || stripos($url,'file:')===0 || stripos($url,'res:')===0 || stripos($url,'C:')===0 || strpos($url, GLYPE_BROWSE)===0 ) {
+	if ( empty($url) || $url[0]=='#' || $url=='about:' || stripos($url,'data:')===0 || stripos($url,'file:')===0 || stripos($url,'res:')===0 || stripos($url,'C:')===0 || strpos($url, BYPASS_BROWSE)===0 ) {
 		return '';
 	}
 
@@ -417,11 +403,11 @@ function proxyURL($url, $givenFlag = false) {
 
 	# Return in path info format (only when encoding is on)
 	if ( $CONFIG['path_info_urls'] && $options['encodeURL'] ) {
-		return GLYPE_BROWSE . '/' . str_replace('%', '_', chunk_split($url, 8, '/')) . 'b' . $bitfield . '/' . ( $addFlag ? 'f' . $addFlag : '') . $anchor;
+		return BYPASS_BROWSE . '/' . str_replace('%', '_', chunk_split($url, 8, '/')) . 'b' . $bitfield . '/' . ( $addFlag ? 'f' . $addFlag : '') . $anchor;
 	}
 
 	# Otherwise, return in 'normal' (query string) format
-	return GLYPE_BROWSE . '?u=' . $url . '&b=' . $bitfield . ( $addFlag ? '&f=' . $addFlag : '' ) . $anchor;
+	return BYPASS_BROWSE . '?u=' . $url . '&b=' . $bitfield . ( $addFlag ? '&f=' . $addFlag : '' ) . $anchor;
 }
 
 # Takes a URL that has been proxied by the proxyURL() function
@@ -434,7 +420,7 @@ function deproxyURL($url, $verifyUnique=false) {
 	}
 
 	# Remove our prefix
-	$url = str_replace(GLYPE_BROWSE, '', $url);
+	$url = str_replace(BYPASS_BROWSE, '', $url);
 
 	# Take off flags and bitfield
 	if ( $url[0] == '/' ) {
@@ -627,10 +613,10 @@ function getTemplatePath($file) {
 	global $CONFIG;
 
 	# First look in custom theme folder
-	if ( ! file_exists($return = GLYPE_ROOT . '/themes/' . $CONFIG['theme'] . '/' . $file . '.php') ) {
+	if ( ! file_exists($return = BYPASS_ROOT . '/themes/' . $CONFIG['theme'] . '/' . $file . '.php') ) {
 
 		# Then look in default folder (if different)
-		if ( $CONFIG['theme'] == 'default' || ! file_exists($return = GLYPE_ROOT . '/themes/default/' . $file . '.php') ) {
+		if ( $CONFIG['theme'] == 'default' || ! file_exists($return = BYPASS_ROOT . '/themes/default/' . $file . '.php') ) {
 
 			# Still not found? Fail.
 			return false;
@@ -656,7 +642,7 @@ function replaceThemeTags($template) {
 
 			# And for backwards compatability - will be removed at next major release
 			if ( COMPATABILITY_MODE ) {
-				$template = str_replace('<!--[glype:' . $tag . ']-->', $value, $template);
+				$template = str_replace('<!--[bypass:' . $tag . ']-->', $value, $template);
 			}
 
 		}
@@ -738,7 +724,7 @@ function injectionJS() {
 	# Prepare options to make available for our javascript
 
 	# Constants
-	$siteURL = GLYPE_URL;
+	$siteURL = BYPASS_URL;
 	$scriptName = SCRIPT_NAME;
 
 	# URL parts
@@ -769,7 +755,7 @@ function injectionJS() {
 	$optional .= $jsFlags === false ? ',test:1' : '';
 
 	# Path to our javascript file
-	$jsFile = GLYPE_URL . '/includes/main.js?'.$CONFIG['version'];
+	$jsFile = BYPASS_URL . '/includes/main.js?'.$CONFIG['version'];
 
 	return <<<OUT
 	<script type="text/javascript">ginf={url:'{$siteURL}',script:'{$scriptName}',target:{h:'{$targetHost}',p:'{$targetPath}',b:'{$base}',u:'{$fullURL}'},enc:{u:'{$unique}',e:'{$options['encodeURL']}',x:'{$options['encodePage']}',p:'{$CONFIG['path_info_urls']}'},b:'{$bitfield}'{$optional}}</script>
@@ -839,7 +825,7 @@ function redirect($to = 'index.php') {
 	if ( strpos($to, 'http') !== 0 ) {
 
 		# If not, prefix our current URL
-		$to = GLYPE_URL . '/' . $to;
+		$to = BYPASS_URL . '/' . $to;
 
 	}
 
@@ -932,7 +918,7 @@ function currentURL() {
 	$separator = $method == 'QUERY_STRING' ? '?' : '';
 
 	# Return full URL
-	return GLYPE_BROWSE . $separator . ( isset($_SERVER[$method]) ? $_SERVER[$method] : '');
+	return BYPASS_BROWSE . $separator . ( isset($_SERVER[$method]) ? $_SERVER[$method] : '');
 }
 
 # Check tmp directory and create it if necessary
@@ -982,7 +968,7 @@ function arcfour($w,$k,$d) {
 }
 
 # note - intended to obfustate URLs and HTML source code. Does not provide security. Use SSL for actual security.
-function glype_session_id() {
+function bypass_session_id() {
 	$session_id = session_id();
 	if ($session_id=='') {
 		return '';
