@@ -1100,7 +1100,7 @@ switch ( $action ) {
 			$location->redirect();
 
 		}
-
+		
 		# Do we have any submitted details to process?
 		if ( $input->pSubmit ) {
 
