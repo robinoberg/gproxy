@@ -251,4 +251,4 @@ $CONFIG['version'] = '1.4.15';
 // Anything below this line will be preserved when the admin control panel rewrites
 // the settings. Useful for storing settings that don't/can't be changed from the control panel
 
-$adminDetails['dibyadas'] = 'ad8f8e488e3511ac6dea2bef36174873';
+$adminDetails['someuser'] = '3e6def3f76fb256782f7b3d4caf500a5';
