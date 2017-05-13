@@ -227,14 +227,14 @@ $CONFIG['options']['stripTitle'] = array(
 $CONFIG['options']['stripJS'] = array(
 	'title'	 => 'Remove Scripts',
 	'desc'	 => 'Remove scripts to protect your anonymity and speed up page loads. However, not all sites will provide an HTML-only alternative. (Recommended)',
-	'default' => true,
+	'default' => false,
 	'force'	 => false
 );
 
 $CONFIG['options']['stripObjects'] = array(
 	'title'	 => 'Remove Objects',
 	'desc'	 => 'You can increase page load times by removing unnecessary Flash, Java and other objects. If not removed, these may also compromise your anonymity.',
-	'default' => true,
+	'default' => false,
 	'force'	 => false
 );
 
