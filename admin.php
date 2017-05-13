@@ -1429,7 +1429,7 @@ OUT;
 	case 'settings':
 
 		# Check the settings are writable
-		if ( false) ) {
+		if ( false) {
 			$error->add('The settings file is not writable. You will not be able to save any changes. Please set permissions to allow PHP to write to <b>' . realpath(ADMIN_BYPASS_SETTINGS) . '</b>');
 			$tpl->disabled = ' disabled="disabled"';
 		}
