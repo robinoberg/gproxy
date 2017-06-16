@@ -26,7 +26,7 @@ label {
    display: block;
 }
    </style>
-   <base href="<?php echo GLYPE_URL; ?>/">
+   <base href="<?php echo BYPASS_URL; ?>/">
 </head>
 <body>
    <div id="wrapper">
