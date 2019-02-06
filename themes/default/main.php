@@ -9,7 +9,12 @@
 	/* GLOBAL ELEMENTS */
 	html,body {
 		margin: 0; padding: 0;
-		background: #0b1933;
+        	background-color: #935d8c;
+        	background-image: url("images/overlay.png"), -moz-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+        	background-image: url("images/overlay.png"), -webkit-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+        	background-image: url("images/overlay.png"), -ms-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+        	background-image: url("images/overlay.png"), linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+    }
 		font-size: 100%;
 		font-family: "trebuchet ms", arial, verdana;
 		color: #444;
@@ -253,7 +258,7 @@
 		</ul>
 	</div>
 	<div id="footer">
-		Powered by <a href="http://www.glype.com/">Glype</a>&reg; <!--[version]-->.
+		Powered by Glype &reg; <!--[version]-->.
 	</div>
 </div>
 </body>
