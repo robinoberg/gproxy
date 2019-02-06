@@ -23,7 +23,7 @@
 ******************************************************************/
 
 // Website name
-$themeReplace['site_name'] = $_SERVER['HTTP_HOST'].' proxy';
+$themeReplace["Robin's"] = $_SERVER['HTTP_HOST'].' proxy';
 
 // Meta description
 $themeReplace['meta_description'] = <<<OUT
