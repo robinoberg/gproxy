@@ -192,6 +192,9 @@
 		text-align: left;
 		background-color: #555555;
 	}
+	#footer {
+		display: none;
+	{
 </style>
 <?=injectionJS();?>
 <script type="text/javascript">
