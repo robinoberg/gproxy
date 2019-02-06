@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title><!--[site_name]--></title>
+<title>Robin's proxy on Heroku</title>
 <meta name="description" content="<!--[meta_description]-->">
 <meta name="keywords" content="<!--[meta_keywords]-->">
 <style type="text/css">
