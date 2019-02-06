@@ -15,7 +15,7 @@
         	background-image: url("images/overlay.png"), -ms-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
         	background-image: url("images/overlay.png"), linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
 		font-size: 100%;
-		font-family: "trebuchet ms", arial, verdana;
+		font-family: Avenir;
 		color: #444;
 		text-align: center;
 	}
@@ -50,7 +50,7 @@
 	
 	/* ELEMENTS */
 	h1 {
-		font: 250% "trebuchet ms";
+		font: 250% Avenir;
 		color: #fff;
 		padding: 40px 0 10px 10px;
 		margin: 0;
@@ -69,7 +69,7 @@
 		color: #FFFFFF;
 	}
 	h2 {
-		font: bold 100% arial, verdana, sans-serif;
+		font: bold 100% Avenir;
 		color: #3B578B;
 		border-bottom: 1px solid #ccc;
 		padding-bottom: 3px;
@@ -121,11 +121,24 @@
 	}
 	input.textbox {
 		width: 500px;
-		font: 120% arial, verdana, sans-serif;
+		font-family:Avenir;
+		cursor:pointer;
+		background-color:#637583;
+        	padding:25px 25px 25px 25px;
+        	border-radius:15px;
+        	box-shadow:
+        	1px 1px 0px 0px #b6c0c8,
+        	2px 2px 0px 0px #b6c0c8,
+        	3px 3px 0px 0px #b6c0c8,
+        	4px 4px 0px 0px #b6c0c8,
+        	5px 5px 0px 0px #b6c0c8,
+        	6px 6px 0px 0px #b6c0c8;
 	}
 	input.button {
 		margin-top: 10px;
-		font-family: arial, verdana, sans-serif;
+		font-family:Avenir;
+		cursor:pointer;
+        	border-radius: 15px;
 		font-size: 120%;
 	}
 	label {
