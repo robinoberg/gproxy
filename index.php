@@ -34,6 +34,8 @@ foreach ( $CONFIG['options'] as $name => $details ) {
 	# Add to the toShow array
 	$toShow[] = array(
 		'name'			=> $name,
+		'title'			=> $details['title'],
+		'desc'			=> $details['desc'],
 		'escaped_desc'	=> str_replace("'", "\'", $details['desc']),
 		'checked'		=> $checked
 	);
