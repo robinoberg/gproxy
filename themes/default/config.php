@@ -23,7 +23,7 @@
 ******************************************************************/
 
 // Website name
-$themeReplace['site_name'] = $_SERVER['HTTP_HOST'].' Glype&reg; proxy';
+$themeReplace['site_name'] = $_SERVER['HTTP_HOST'].' proxy';
 
 // Meta description
 $themeReplace['meta_description'] = <<<OUT
@@ -37,10 +37,8 @@ OUT;
 
 // Proxy description text
 $themeReplace['description'] = <<<OUT
-   <p>Your very own proxy service deployed on your Heroku account. Since this service serves only you, it is not only fast, also reliable.
-   You may have to allow flash in your browser for certain sites (It is disabled by default).
-   </br> <h2><b><font color="red" >Please note that this proxy is not foolproof. Do not use this to do sensitive things where you do not want your identity compromised! </font></b></h2> 
-   	   While this may not work with many sites (like Youtube), it works just fine for many others. This is especially useful for students inside college campus where many sites are blocked by their proxy servers. 
+   <p>Robin's proxy on Heroku. </br>
+   	   May not work well with sites such as YouTube, but works fine for many others. This is especially useful to access content that are blocked by proxy servers. 
    </p>
 OUT;
 
