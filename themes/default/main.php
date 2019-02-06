@@ -39,6 +39,11 @@
 		width: 700px;
 		margin: 0 auto 0 auto;
 		text-align: left;
+		border-radius: 15px;
+		box-shadow:
+        	1px 1px 0px 0px #b6c0c8,
+        	2px 2px 0px 0px #b6c0c8,
+        	3px 3px 0px 0px #b6c0c8,
 	}
 	
 	#content {
@@ -123,16 +128,11 @@
 		width: 500px;
 		font-family:Avenir;
 		cursor:pointer;
-		background-color:#637583;
-        	padding:25px 25px 25px 25px;
         	border-radius:15px;
         	box-shadow:
         	1px 1px 0px 0px #b6c0c8,
         	2px 2px 0px 0px #b6c0c8,
         	3px 3px 0px 0px #b6c0c8,
-        	4px 4px 0px 0px #b6c0c8,
-        	5px 5px 0px 0px #b6c0c8,
-        	6px 6px 0px 0px #b6c0c8;
 	}
 	input.button {
 		margin-top: 10px;
@@ -140,6 +140,10 @@
 		cursor:pointer;
         	border-radius: 15px;
 		font-size: 120%;
+		box-shadow:
+        	1px 1px 0px 0px #b6c0c8,
+        	2px 2px 0px 0px #b6c0c8,
+        	3px 3px 0px 0px #b6c0c8,
 	}
 	label {
 		font-weight: light;
@@ -156,7 +160,11 @@
 	table {
 		border-color: #666;
 		border-width: 0 0 1px 1px;
-		border-style: solid;
+		border-radius: 15px;
+		box-shadow:
+        	1px 1px 0px 0px #b6c0c8,
+        	2px 2px 0px 0px #b6c0c8,
+        	3px 3px 0px 0px #b6c0c8,
 		width: 50%;
 	}
 	th {
